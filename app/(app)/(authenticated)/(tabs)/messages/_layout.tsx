@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, ViewProps } from "react-native";
 import { Stack } from "expo-router";
 import { COLORS } from "@/utils/colors";
+import { useColorScheme } from "react-native";
 
 export const MessagesLayout = () => {
     return (
@@ -9,7 +10,7 @@ export const MessagesLayout = () => {
             screenOptions={{
                 headerShown: true,
                 headerStyle: {
-                    backgroundColor: COLORS.background,
+                    backgroundColor: COLORS.backgroundDark,
                 },
                 headerTintColor: "#fff",
             }}

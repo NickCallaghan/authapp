@@ -11,6 +11,12 @@ import {
     Inter_700Bold,
 } from "@expo-google-fonts/inter";
 import * as SplashScreen from "expo-splash-screen";
+import { useColorScheme } from "react-native";
+import {
+    ThemeProvider,
+    DarkTheme,
+    DefaultTheme,
+} from "@react-navigation/native";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -24,6 +30,8 @@ const queryClient = new QueryClient({
 export const RootLayout = () => {
     useReactQueryDevTools(queryClient);
     SplashScreen.preventAutoHideAsync();
+    const colorScheme = useColorScheme();
+
     const [fontsLoaded] = useFonts({
         Inter_900Black,
         Inter_400Regular,
@@ -36,11 +44,15 @@ export const RootLayout = () => {
     }, [fontsLoaded]);
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-                <Slot />
-            </AuthProvider>
-        </QueryClientProvider>
+        <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+            <QueryClientProvider client={queryClient}>
+                <AuthProvider>
+                    <Slot />
+                </AuthProvider>
+            </QueryClientProvider>
+        </ThemeProvider>
     );
 };
 

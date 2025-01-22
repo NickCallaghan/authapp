@@ -144,6 +144,7 @@ export const uploadImage = async ({
     uri: string;
     token: string;
 }) => {
+    console.log("UploadCalled with: ", { uri, token });
     return FileSystem.uploadAsync(`${API_URL}/users/me/avatar`, uri, {
         httpMethod: "POST",
         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
@@ -151,5 +152,8 @@ export const uploadImage = async ({
         headers: {
             Authorization: `Bearer ${token}`,
         },
-    }).then((res) => JSON.parse(res.body));
+    }).then((res) => {
+        console.log({ RESPONSE: res });
+        return JSON.parse(res.body);
+    });
 };

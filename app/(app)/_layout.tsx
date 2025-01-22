@@ -3,10 +3,12 @@ import { COLORS } from "@/utils/colors";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import { useColorScheme } from "react-native";
 
 export default function UnathourisedStack() {
     const router = useRouter();
     const { isInitialised, token } = useAuth();
+    const colorScheme = useColorScheme();
 
     const segments = useSegments();
 
@@ -25,7 +27,10 @@ export default function UnathourisedStack() {
         <Stack
             screenOptions={{
                 contentStyle: {
-                    backgroundColor: COLORS.background,
+                    backgroundColor:
+                        colorScheme === "dark"
+                            ? COLORS.dark.background
+                            : COLORS.light.background,
                 },
                 headerStyle: {
                     backgroundColor: COLORS.background,

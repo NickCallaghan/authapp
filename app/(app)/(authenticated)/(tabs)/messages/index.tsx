@@ -1,29 +1,29 @@
+import EmptyState from "@/components/common/EmptyState";
+import ErrorState from "@/components/common/ErrorState";
+import Fab from "@/components/Fab";
+import MessageItemPage from "@/components/MessageItem";
+import { fetchMessages } from "@/utils/api";
+import { COLORS } from "@/utils/colors";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import {
-    View,
-    Text,
-    StyleSheet,
-    ViewProps,
-    Button,
     ActivityIndicator,
+    ColorSchemeName,
+    FlatList,
     RefreshControl,
+    StyleSheet,
+    useColorScheme,
+    View,
+    ViewProps,
 } from "react-native";
-import { useRouter } from "expo-router";
-import Fab from "@/components/Fab";
-import { useQuery } from "@tanstack/react-query";
-import { fetchMessages } from "@/utils/api";
-import { FlatList } from "react-native";
-import ErrorState from "@/components/common/ErrorState";
-import EmptyState from "@/components/common/EmptyState";
-import MessageItemPage from "@/components/MessageItem";
-import { COLORS } from "@/utils/colors";
 
 interface messagesProps extends ViewProps {
     // Add your custom props here
 }
 
 const MessagesPage: React.FC<messagesProps> = ({ style }) => {
-    const router = useRouter();
+    const colorScheme = useColorScheme();
+    const styles = makeStyles(colorScheme);
 
     const {
         data: messages,
@@ -77,18 +77,22 @@ const MessagesPage: React.FC<messagesProps> = ({ style }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "lightgray",
-    },
-    flatlist: {
-        flex: 1,
-        width: "100%",
-        padding: 16,
-    },
-});
+const makeStyles = (colorScheme: ColorSchemeName) =>
+    StyleSheet.create({
+        container: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor:
+                colorScheme === "dark"
+                    ? COLORS.dark.background
+                    : COLORS.light.background,
+        },
+        flatlist: {
+            flex: 1,
+            width: "100%",
+            padding: 16,
+        },
+    });
 
 export default MessagesPage;
