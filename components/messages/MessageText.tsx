@@ -15,6 +15,7 @@ export const MessageText: React.FC<MessageTextProps> = ({
 const styles = StyleSheet.create({
     container: {
         color: "black",
+        fontFamily: "Inter_400Regular",
     },
 });
 

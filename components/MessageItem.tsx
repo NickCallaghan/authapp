@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
         flex: 2,
         flexWrap: "wrap",
         fontSize: 16,
+        fontFamily: "Inter_400Regular",
     },
     createdAtText: {
         flex: 1,
